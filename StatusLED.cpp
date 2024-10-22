@@ -1,7 +1,8 @@
 #include "StatusLED.h"
 
 
-StatusLED::StatusLED(uint16_t num_pixels, uint8_t pin): ledStrip(num_pixels, pin, NEO_GRB + NEO_KHZ800) {
+StatusLED::StatusLED(uint16_t num_pixels, uint8_t pin)
+  : ledStrip(num_pixels, pin, NEO_GRB + NEO_KHZ800) {
   progress = 0;
   totalPixels = num_pixels;
   updateIntervalMillis = 10;
@@ -42,7 +43,8 @@ void StatusLED::setEndingColorHSV(ColorConverter::HSV hsv) {
   setEndingColor(rgb.r, rgb.g, rgb.b);
 }
 
-void StatusLED::setUpdateIntervalMillis(uint16_t interval) {
+void StatusLED::setUpdateIntervalMillis(uint16_t interval)
+{
   updateIntervalMillis = interval;
 }
 
@@ -55,7 +57,7 @@ void StatusLED::update() {
       ledStrip.setPixelColor(i, interpolateColors(startingColor, endingColor, (i + progress) & 255));
     }
     ledStrip.show();
-
+    
     progress++;
     if (progress >= 255) {
       progress = 0;
@@ -74,13 +76,14 @@ void StatusLED::blink() {
   }
   ledStrip.show();
   delay(100);  // Espera 100ms
-
+  
   // Enciende todos los LEDs con el color de inicio
   for (uint16_t i = 0; i < totalPixels; i++) {
     ledStrip.setPixelColor(i, startingColor);
   }
   ledStrip.show();
   delay(100);  // Espera 100ms
+
 }
 
 uint32_t StatusLED::interpolateColors(uint32_t colorFrom, uint32_t colorTo, uint8_t position) {

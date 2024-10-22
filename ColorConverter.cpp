@@ -1,11 +1,11 @@
 #include "ColorConverter.h"
 
 ColorConverter::HSV ColorConverter::HSVColor(float h, float s, float v) {
-  HSV color;
-  color.h = h;
-  color.s = s;
-  color.v = v;
-  return color;
+    HSV color;
+    color.h = h;
+    color.s = s;
+    color.v = v;
+    return color;
 }
 
 ColorConverter::RGB ColorConverter::hsvToRgb(ColorConverter::HSV hsv) {
